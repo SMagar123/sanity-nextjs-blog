@@ -3,6 +3,8 @@ import { client, urlFor } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 
+export const revalidate = 30;
+
 async function getBlogArticles(slug: string) {
   const query = `*[_type=="blog" && slug.current=='${slug}']{
   "currentSlug":slug.current,
