@@ -1,29 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { blogCard } from "@/lib/interface";
-import { client, urlFor } from "@/lib/sanity";
+import { urlFor } from "@/lib/sanity";
 import Image from "next/image";
 import Link from "next/link";
+import { getBlogData } from "@/services/api/blogs";
 
 export const revalidate = 30;
 
-async function getData() {
-  const query = ` *[_type=='blog'] | order(_createdAt desc){
-  title,
-    shortDescription,
-    "currentSlug":slug.current,
-    headerImage
-}`;
-  const data = await client.fetch(query);
-  return data;
-}
-
-export default async function Home() {
-  const blogData: blogCard[] = await getData();
+const Home = async () => {
+  const blogs: blogCard[] = await getBlogData();
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 mt-8 gap-4">
-      {blogData.map((blog, idx) => (
+      {blogs.map((blog, idx) => (
         <Card key={idx}>
           <Image
             src={urlFor(blog?.headerImage).url()}
@@ -47,4 +37,6 @@ export default async function Home() {
       ))}
     </div>
   );
-}
+};
+
+export default Home;

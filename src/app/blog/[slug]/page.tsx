@@ -2,23 +2,12 @@ import { blogAritcle } from "@/lib/interface";
 import { client, urlFor } from "@/lib/sanity";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
+import { getBlogArticles } from "@/services/api/blogs";
 
 export const revalidate = 30;
 
-async function getBlogArticles(slug: string) {
-  const query = `*[_type=="blog" && slug.current=='${slug}']{
-  "currentSlug":slug.current,
-  title,
-    content,
-    headerImage
-}[0]`;
-
-  const data = await client.fetch(query);
-  return data;
-}
-
 const BlogAricles = async ({ params }: { params: { slug: string } }) => {
-  const blogArticle: blogAritcle = await getBlogArticles(params.slug);
+  const blogArticle: blogAritcle = await getBlogArticles(params?.slug);
 
   return (
     <div className="mt-5 grid grid-cols-1 md:grid-cols-4 ">
