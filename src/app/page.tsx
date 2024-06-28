@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getBlogData } from "@/services/api/blogs";
 
-export const revalidate = 30;
+export const revalidate = 3600;
 
 const Home = async () => {
   const blogs: blogCard[] = await getBlogData();

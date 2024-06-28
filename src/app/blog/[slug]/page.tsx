@@ -6,7 +6,7 @@ import { getBlogArticles } from "@/services/api/blogs";
 import { ClipboardCheck } from "lucide-react";
 import formattedDate from "@/utils/Date";
 
-export const revalidate = 30;
+export const revalidate = 3600;
 
 const BlogAricles = async ({ params }: { params: { slug: string } }) => {
   const blogArticle: blogAritcle = await getBlogArticles(params?.slug);
