@@ -12,9 +12,9 @@ const Home = async () => {
   const blogs: blogCard[] = await getBlogData();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 mt-8 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-8 lg:grid-cols-12 mt-8 gap-4">
       {blogs.map((blog, idx) => (
-        <Card key={idx}>
+        <Card key={idx} className="col-span-full md:col-span-4">
           <Image
             src={urlFor(blog?.headerImage).url()}
             alt="blog image"

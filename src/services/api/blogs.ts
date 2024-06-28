@@ -1,7 +1,7 @@
 import { client } from "@/lib/sanity";
 import { blogCard } from "@/lib/interface";
 export const getBlogData = async (): Promise<blogCard[]> => {
-  const query = ` *[_type=='blog'] | order(_createdAt desc){
+  const query = ` *[_type=='blog' && status=="published"] | order(_createdAt desc){
   title,
     shortDescription,
     "currentSlug":slug.current,
@@ -18,7 +18,8 @@ export const getBlogArticles = async (slug: string) => {
   "currentSlug":slug.current,
   title,
     content,
-    headerImage
+    headerImage,
+    createdOn
 }[0]`;
 
   const data = await client.fetch(query);

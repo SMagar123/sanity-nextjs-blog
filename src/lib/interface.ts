@@ -9,5 +9,6 @@ export interface blogAritcle {
   currentSlug: string;
   title: string;
   content: any;
+  createdOn: string;
   headerImage: any;
 }
